@@ -9,7 +9,8 @@ class StocksClient:
         headers = {} if not long_pending \
             else {'long_pending': 'True'}
         print(headers)
-        response = requests.post(f"{self.base_url}/orders/", json=data, headers=headers)
+        response = requests.post(f"{self.base_url}/orders/", json=data,
+                                 headers=headers)
         print("Status Code", response.status_code)
         print("JSON Response ", response.json())
         return response

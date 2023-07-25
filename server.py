@@ -1,9 +1,10 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Request
-from fastapi.responses import HTMLResponse
 import asyncio
 import uuid
-from pydantic import BaseModel, UUID4
 import random
+
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect,\
+    HTTPException, Request
+from pydantic import BaseModel, UUID4
 
 
 class Order(BaseModel):
@@ -20,43 +21,6 @@ class Status:
 
 
 app = FastAPI()
-
-html = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Chat</title>
-    </head>
-    <body>
-        <h1>WebSocket Chat</h1>
-        <h2>Your ID: <span id="ws-id"></span></h2>
-        <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
-        </form>
-        <ul id='messages'>
-        </ul>
-        <script>
-            var client_id = Date.now()
-            document.querySelector("#ws-id").textContent = client_id;
-            var ws = new WebSocket(`ws://localhost:8000/ws/${client_id}`);
-            ws.onmessage = function(event) {
-                var messages = document.getElementById('messages')
-                var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
-                message.appendChild(content)
-                messages.appendChild(message)
-            };
-            function sendMessage(event) {
-                var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
-                event.preventDefault()
-            }
-        </script>
-    </body>
-</html>
-"""
 
 
 class ConnectionManager:
@@ -79,13 +43,8 @@ manager = ConnectionManager()
 orders = {}
 
 
-@app.get("/")
-async def get():
-    return HTMLResponse(html)
-
-
 @app.get("/orders")
-async def get():
+async def get_orders():
     return orders
 
 
@@ -103,7 +62,7 @@ async def create_order(order_input: Order, request: Request):
     order_input.id = uuid.uuid4()
     order_input.status = Status.pending
     orders[str(order_input.id)] = order_input
-    task = asyncio.create_task(
+    asyncio.create_task(
         start_pending_order(
             str(order_input.id),
             long_pending=long_pending

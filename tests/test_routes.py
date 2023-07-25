@@ -1,5 +1,6 @@
 import pytest
 from time import sleep
+
 from server import Status
 
 
