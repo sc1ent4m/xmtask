@@ -3,12 +3,12 @@ This is part of a test task without:
 * performance tests
 * random sleeps on all routes (implemented only in POST order route)
 
-### Setup and Environment
+****### Setup and Environment****
 Python 3.10.6
 
 Additional libraries can be installed with the following command:
 ```
-pip install -r requriments.txt
+pip install -r requirements.txt
 ```
 
 ### How to start server
