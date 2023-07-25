@@ -1,0 +1,12 @@
+FROM python:3.10.6
+
+ADD ./requirements.txt ./
+ADD ./tests ./tests
+ADD ./api_client.py ./
+ADD ./models.py ./
+ADD ./server.py ./
+
+WORKDIR ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+CMD python3 -m pytest ./tests
