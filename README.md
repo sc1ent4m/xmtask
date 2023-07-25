@@ -26,16 +26,16 @@ For tests rerun server must be restarted
 ### Run tests using Docker
 1) Build images:
 ```
-docker build -f ServerDockerfile -t server_app .
-docker build -f TestsDockerfile -t pytest_container .
+docker build -f ServerDockerfile -t server_app_image .
+docker build -f TestsDockerfile -t pytest_image .
 ```
 2) Start server:
 ```
-docker run  --name appcontainer  -p 8000:8000 server_app
+docker run  --name appcontainer  -p 8000:8000 server_app_image
 ```
 3) Run tests:
 ```
-docker run --name testcontainer --net=host tests
+docker run --name testcontainer --net=host pytest_image
 ```
 
 ### Comments
