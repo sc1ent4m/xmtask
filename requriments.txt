@@ -1,0 +1,6 @@
+fastapi
+websockets
+uvicorn[standard]
+requests
+pytest
+pytest-html
