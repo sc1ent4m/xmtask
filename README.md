@@ -22,6 +22,7 @@ uvicorn server:app --reload
 ```
 pytest tests/ --html=report.html
 ```
+For tests rerun server must be restarted
 
 ### Comments
 
