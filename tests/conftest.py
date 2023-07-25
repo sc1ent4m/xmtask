@@ -1,5 +1,5 @@
 import pytest
-from api_client import StocksClient
+from tests.api_client import StocksClient
 from websockets.sync.client import connect
 
 

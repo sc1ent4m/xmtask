@@ -4,14 +4,8 @@ import random
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect,\
     HTTPException, Request
-from pydantic import BaseModel, UUID4
 
-
-class Order(BaseModel):
-    id: UUID4 | None = None
-    stoks: str
-    quantity: int
-    status: str | None = None
+from .models import Order
 
 
 class Status:

@@ -1,7 +1,7 @@
 import pytest
 from time import sleep
 
-from server import Status
+from app.server import Status
 
 
 data = {

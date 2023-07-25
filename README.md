@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ### How to start server
 
 ```
-uvicorn server:app --reload
+uvicorn app.server:app --reload
 ```
 
 ### How to run tests
