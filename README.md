@@ -5,6 +5,7 @@ This is part of a test task without:
 
 ### Setup and Environment
 Python 3.10.6
+
 Additional libraries can be installed with the following command:
 ```
 pip install -r requriments.txt
@@ -19,7 +20,7 @@ uvicorn server:app --reload
 ### How to run tests
 
 ```
-pytest tests -sl --html=report.html
+pytest tests/ --html=report.html
 ```
 
 ### Comments
