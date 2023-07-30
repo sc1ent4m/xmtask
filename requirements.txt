@@ -1,6 +1,8 @@
-fastapi
-websockets
+fastapi==0.100.0
+websockets==11.0.3
 uvicorn[standard]
-requests
-pytest
-pytest-html
+requests==2.31.0
+pytest==7.4.0
+pytest-html==3.2.0
+locust==2.15.1
+locust-plugins==3.4.0
