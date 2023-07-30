@@ -39,11 +39,13 @@ orders = {}
 
 @app.get("/orders")
 async def get_orders():
+    await asyncio.sleep(random.uniform(0.1, 1))
     return orders
 
 
 @app.get("/orders/{order_id}")
 async def read_order(order_id: str):
+    await asyncio.sleep(random.uniform(0.1, 1))
     if order_id not in orders:
         raise HTTPException(status_code=404, detail="Order not found")
     return orders[order_id]
@@ -56,7 +58,7 @@ async def create_order(order_input: Order, request: Request):
     order_input.id = uuid.uuid4()
     order_input.status = Status.pending
     orders[str(order_input.id)] = order_input
-    asyncio.create_task(
+    asyncio.create_task(  # random short delay
         start_pending_order(
             str(order_input.id),
             long_pending=long_pending
@@ -81,6 +83,7 @@ async def delete_order(order_id: str):
     if orders[order_id].status != Status.executed:
         orders[order_id].status = Status.cancelled
         await manager.broadcast(f'{order_id} is {Status.cancelled}')
+        await asyncio.sleep(random.uniform(0.1, 1))
 
 
 @app.websocket("/ws")

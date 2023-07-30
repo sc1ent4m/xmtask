@@ -1,6 +1,7 @@
 import pytest
 from time import sleep
 
+from app.models import Order
 from app.server import Status
 
 
@@ -30,16 +31,18 @@ def test_get_orders(stocks_client, send_orders):
     assert len(orders) == 2
     for order, value in orders.items():
         assert value['id']
-        assert value['status'] == Status.pending
+        assert value['status'] != Status.cancelled
+        Order.model_validate(value)
 
 
 def test_get_order(stocks_client):
     id = stocks_client.post_order(uniq_data).json()['id']
     responce = stocks_client.get_order(id).json()
+    Order.model_validate(responce)
     assert responce['id'] == id
     assert responce['stoks'] == 'USDEUR'
     assert responce['quantity'] == 234
-    assert responce['status'] == Status.pending
+    assert responce['status'] != Status.cancelled
 
 
 def test_post_wrong_order(stocks_client):
