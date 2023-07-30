@@ -1,5 +1,4 @@
-This is part of a test task without:
-* random sleeps on all routes (implemented only in POST order route)
+Simple asynchronous server with tests.
 
 ### Setup and Environment
 Python 3.10.6
