@@ -41,7 +41,7 @@ Simply run following command:
 ```commandline
 LOCUST_PLAYWRIGHT=1 locust -f tests/perftest.py --headless -u 100 -r 100  -i 100 -t 20 --host http://127.0.0.1:8000/
 ```
-After execution standard deviation and average order execution will appear in the console:
+After execution standard deviation and average order execution will appear in the console.\
 Here is stdout example:
 ```
 Response time percentiles (approximated)
